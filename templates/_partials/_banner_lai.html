@@ -1,0 +1,16 @@
+{% comment %}
+Banner LAI (Lei 12.527/2011 + Decreto Federal 7.724/2012 art. 7º) —
+exibido na home apontando para /transparencia/.
+{% endcomment %}
+<aside class="sp-banner-lai" role="region" aria-label="Acesso à Informação">
+  <a href="{% url 'conteudo:transparencia' %}" class="sp-banner-lai__link">
+    <span class="sp-banner-lai__icone" aria-hidden="true">
+      <svg class="sp-icon" focusable="false"><use href="#icon-info"/></svg>
+    </span>
+    <span class="sp-banner-lai__texto">
+      <strong>Acesso à Informação</strong>
+      <span>Lei nº 12.527/2011 — Transparência ativa da PESCP</span>
+    </span>
+    <span class="sp-banner-lai__seta" aria-hidden="true">→</span>
+  </a>
+</aside>

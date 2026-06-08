@@ -1,0 +1,70 @@
+{% comment %}
+Rodapé institucional — duas faixas: links institucionais + barra final
+com © + Ouvidoria/Transparência/SIC.
+{% endcomment %}
+<footer id="sp-rodape" class="sp-rodape" role="contentinfo">
+  <div class="sp-rodape__faixa-links">
+    <div class="sp-rodape__container">
+      <div class="sp-rodape__colunas">
+        <div class="sp-rodape__coluna">
+          <h2 class="sp-rodape__titulo">Sobre</h2>
+          <ul>
+            <li><a href="{% url 'conteudo:sobre' %}">Sobre a PESCP</a></li>
+            <li><a href="{% url 'conteudo:governanca' %}">Governança</a></li>
+            <li><a href="{% url 'conteudo:metodologia' %}">Metodologia</a></li>
+            <li><a href="{% url 'conteudo:parceiros' %}">Parceiros</a></li>
+            <li><a href="https://compras.sp.gov.br/laboratorio-de-logistica/" target="_blank" rel="noopener noreferrer">LILP</a></li>
+            <li><a href="https://www.sggd.sp.gov.br/" target="_blank" rel="noopener noreferrer">SGGD</a></li>
+          </ul>
+        </div>
+
+        <div class="sp-rodape__coluna">
+          <h2 class="sp-rodape__titulo">Plataforma</h2>
+          <ul>
+            <li><a href="{% url 'criterios:list' %}">Buscar critérios</a></li>
+            <li><a href="{% url 'criterios:objeto_list' %}">Por objeto contratual</a></li>
+            <li><a href="{% url 'criterios:ods_list' %}">Por ODS</a></li>
+            <li><a href="{% url 'criterios:glossario' %}">Glossário</a></li>
+          </ul>
+        </div>
+
+        <div class="sp-rodape__coluna">
+          <h2 class="sp-rodape__titulo">Transparência e Cidadania</h2>
+          <ul>
+            <li><a href="{% url 'conteudo:transparencia' %}">Acesso à Informação (LAI)</a></li>
+            <li><a href="https://www.ouvidoria.sp.gov.br/" target="_blank" rel="noopener noreferrer">Ouvidoria SP</a></li>
+            <li><a href="http://www.transparencia.sp.gov.br/" target="_blank" rel="noopener noreferrer">Portal da Transparência</a></li>
+            <li><a href="http://www.sic.sp.gov.br/" target="_blank" rel="noopener noreferrer">SIC</a></li>
+            <li><a href="{% url 'conteudo:politica-de-privacidade' %}">Política de Privacidade</a></li>
+            <li><a href="{% url 'conteudo:politica-de-cookies' %}">Política de Cookies</a></li>
+            <li><a href="{% url 'conteudo:acessibilidade' %}">Acessibilidade</a></li>
+            <li><a href="{% url 'conteudo:mapa-do-site' %}">Mapa do site</a></li>
+          </ul>
+        </div>
+
+        <div class="sp-rodape__coluna">
+          <h2 class="sp-rodape__titulo">Contato</h2>
+          <address>
+            <p><a href="mailto:{{ pescp_contato_email|default:'lab.sggd@sp.gov.br' }}">{{ pescp_contato_email|default:"lab.sggd@sp.gov.br" }}</a></p>
+            <p>Av. Rangel Pestana, 300<br>Sé — São Paulo/SP</p>
+            <p><a href="{% url 'conteudo:fale-conosco' %}">Fale Conosco</a></p>
+          </address>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sp-rodape__faixa-final">
+    <div class="sp-rodape__container sp-rodape__final-inner">
+      <p class="sp-rodape__copy">
+        © {{ site_year|default:"2026" }} Governo do Estado de São Paulo —
+        Secretaria de Gestão e Governo Digital
+      </p>
+      <ul class="sp-rodape__final-links" aria-label="Canais oficiais do Governo de SP">
+        <li><a href="https://www.ouvidoria.sp.gov.br/" target="_blank" rel="noopener noreferrer">Ouvidoria</a></li>
+        <li><a href="http://www.transparencia.sp.gov.br/" target="_blank" rel="noopener noreferrer">Transparência</a></li>
+        <li><a href="http://www.sic.sp.gov.br/" target="_blank" rel="noopener noreferrer">SIC</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>

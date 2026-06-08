@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load pescp_tags %}
+
+{% block title %}Critérios — PESCP | Governo de SP{% endblock %}
+
+{% block content %}
+<nav class="breadcrumb" aria-label="Trilha de navegação">
+  <a href="{% url 'criterios:home' %}">Início</a>
+  <span class="breadcrumb-sep">›</span>
+  <span aria-current="page">Critérios</span>
+</nav>
+
+<header class="sp-pagina-cabecalho">
+  <h1>Critérios de Sustentabilidade</h1>
+  <p class="sp-pagina-cabecalho__lead">
+    {{ total_resultados }} critério{{ total_resultados|pluralize:"s" }} encontrado{{ total_resultados|pluralize:"s" }}
+    {% if query %}para "<strong>{{ query }}</strong>"{% endif %}.
+  </p>
+</header>
+
+<div class="sp-listagem">
+  {% include "_partials/_facetas.html" %}
+
+  <section class="sp-resultados" aria-label="Lista de critérios">
+    <form id="filter-form" class="sp-resultados__controles" method="get">
+      {% if query %}<input type="hidden" name="q" value="{{ query }}">{% endif %}
+      <label for="sp-ordem">Ordenar por:</label>
+      <select id="sp-ordem" name="ordem" onchange="this.form.submit()">
+        <option value="" {% if not ordem %}selected{% endif %}>Mais recentes</option>
+        <option value="publicacao" {% if ordem == 'publicacao' %}selected{% endif %}>Data de publicação</option>
+        <option value="titulo" {% if ordem == 'titulo' %}selected{% endif %}>Título (A-Z)</option>
+        <option value="ambicao" {% if ordem == 'ambicao' %}selected{% endif %}>Nível de ambição</option>
+      </select>
+      <noscript><button type="submit" class="btn btn-secondary btn-sm">Aplicar</button></noscript>
+    </form>
+
+    {% if criterios %}
+      <ul class="sp-criterio-lista">
+        {% for criterio in criterios %}
+          {% include "criterios/_criterio_card.html" with criterio=criterio only %}
+        {% endfor %}
+      </ul>
+      {% include "_partials/_paginacao.html" %}
+    {% else %}
+      <p class="sp-vazio">
+        Nenhum critério encontrado com os filtros atuais.
+        {% if request.GET %}<a href="{{ request.path }}">Limpar filtros e tentar novamente</a>.{% endif %}
+      </p>
+    {% endif %}
+  </section>
+</div>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load pescp_tags static %}
+
+{% block title %}Objetivos de Desenvolvimento Sustentável (ODS) — PESCP | Governo de SP{% endblock %}
+
+{% block content %}
+<nav class="breadcrumb" aria-label="Trilha de navegação">
+  <a href="{% url 'criterios:home' %}">Início</a>
+  <span class="breadcrumb-sep">›</span>
+  <span aria-current="page">ODS</span>
+</nav>
+
+<header class="sp-pagina-cabecalho">
+  <h1>Os 17 Objetivos de Desenvolvimento Sustentável (ODS)</h1>
+  <p class="sp-pagina-cabecalho__lead">
+    A Agenda 2030 da Organização das Nações Unidas (ONU) define 17 objetivos universais para erradicar a pobreza,
+    proteger o planeta e garantir prosperidade. A PESCP organiza seus critérios em torno deles para que cada contratação
+    pública possa contribuir explicitamente para sua realização.
+  </p>
+</header>
+
+<ul class="sp-ods-grid" aria-label="Lista dos 17 ODS">
+  {% for o in ods_list %}
+    <li>
+      <a href="{{ o.get_absolute_url }}"
+         class="sp-ods-card"
+         aria-label="ODS {{ o.numero }} — {{ o.nome }} ({{ o.total }} {{ o.total|pluralize_pt:'critério' }})">
+        <img src="{% static 'img/ods/ods-' %}{{ o.numero|stringformat:'02d' }}.svg"
+             alt="ODS {{ o.numero }} — {{ o.nome }}"
+             class="sp-ods-card__img"
+             loading="lazy" decoding="async">
+        <span class="sp-ods-card__contagem">
+          <strong>{{ o.total }}</strong>
+          {{ o.total|pluralize_pt:"critério" }}
+        </span>
+      </a>
+    </li>
+  {% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% load pescp_tags %}
+
+{% block title %}Governança — PESCP — Plataforma Estadual de Sustentabilidade em Contratações Públicas | Governo de SP{% endblock %}
+{% block meta_description %}Como a PESCP é governada: comitê editorial, processo de inclusão de novos critérios e princípios de transparência ativa.{% endblock %}
+
+{% block content %}
+<nav class="breadcrumb" aria-label="Trilha de navegação">
+  <a href="{% url 'criterios:home' %}">Início</a>
+  <span class="breadcrumb-sep">›</span>
+  <span aria-current="page">Governança</span>
+</nav>
+
+<article class="sp-pagina-legal">
+  <header>
+    <h1>Governança da PESCP</h1>
+    <p class="sp-pagina-legal__intro">
+      A governança editorial da PESCP é exercida pelo LILP, com
+      participação de servidores da SGGD, da Procuradoria-Geral do
+      Estado e de pesquisadores das instituições parceiras, sob
+      princípios de transparência ativa e revisão por pares.
+    </p>
+  </header>
+
+  <section>
+    <h2>Comitê editorial</h2>
+    <p>
+      A governança editorial da PESCP é exercida pelo
+      <strong>Laboratório de Inovação em Logística Pública
+      (LILP)</strong>, que mantém comitê editorial composto por:
+    </p>
+    <ul>
+      <li>Servidores efetivos da <strong>Secretaria de Gestão e
+        Governo Digital (SGGD)</strong>.</li>
+      <li>Procuradores da <strong>Procuradoria-Geral do Estado de São
+        Paulo (PGE-SP)</strong>, para revisão jurídica.</li>
+      <li>Pesquisadores das instituições parceiras
+        (<strong>USP, UNESP, UNICAMP e PNUD</strong>), para curadoria
+        técnico-acadêmica nos respectivos domínios temáticos.</li>
+    </ul>
+    <p>
+      O comitê delibera sobre a <strong>inclusão, atualização e
+      arquivamento</strong> de critérios, com base em parecer técnico
+      e revisão por pares.
+    </p>
+  </section>
+
+  <section>
+    <h2>Processo de inclusão de novos critérios</h2>
+    <p>
+      Sugestões de novos critérios podem ser encaminhadas por:
+    </p>
+    <ul>
+      <li>Qualquer <strong>servidor público estadual ou municipal</strong>;</li>
+      <li><strong>Pesquisadores acadêmicos</strong>;</li>
+      <li><strong>Organizações da sociedade civil</strong>.</li>
+    </ul>
+    <p>
+      O canal oficial é o formulário disponível na página de
+      <a href="{% url 'conteudo:contato' %}">Contato</a>. As sugestões
+      seguem o fluxo:
+    </p>
+    <ol>
+      <li><strong>Triagem editorial</strong> — verificação de
+        aderência ao escopo da plataforma e duplicidade.</li>
+      <li><strong>Análise técnica</strong> — pesquisador da
+        instituição parceira responsável pelo domínio elabora parecer.</li>
+      <li><strong>Revisão jurídica</strong> — PGE-SP verifica
+        compatibilidade com a {% norma_link "lei-14133-2021" "Lei nº 14.133/2021" %} e normas correlatas.</li>
+      <li><strong>Publicação</strong> — critério recebe código
+        <code>CRIT-AAAA-NNN</code> e crédito à autoria.</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>Sustentação e transparência</h2>
+    <p>
+      A plataforma é mantida com recursos orçamentários da SGGD e
+      opera sob princípios de <strong>transparência ativa</strong>,
+      em consonância com a <strong>Lei de Acesso à Informação</strong>
+      ({% norma_link "lei-12527-2011" "Lei nº 12.527/2011" %}).
+    </p>
+    <p>
+      Toda alteração relevante em um critério — texto, normas
+      vinculadas, status — é registrada com versionamento histórico
+      via <code>django-simple-history</code>, preservando rastreabilidade
+      editorial. A página de
+      <a href="{% url 'conteudo:transparencia' %}">Acesso à Informação (LAI)</a>
+      detalha os instrumentos de transparência da plataforma.
+    </p>
+  </section>
+</article>
+{% endblock %}

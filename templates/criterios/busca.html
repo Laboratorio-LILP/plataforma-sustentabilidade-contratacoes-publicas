@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load pescp_tags %}
+
+{% block title %}Busca {% if query %}— "{{ query }}" {% endif %}— PESCP | Governo de SP{% endblock %}
+
+{% block content %}
+<nav class="breadcrumb" aria-label="Trilha de navegação">
+  <a href="{% url 'criterios:home' %}">Início</a>
+  <span class="breadcrumb-sep">›</span>
+  <span aria-current="page">Busca</span>
+</nav>
+
+<header class="sp-pagina-cabecalho">
+  <h1>Buscar critérios</h1>
+  <form action="{% url 'criterios:buscar' %}" method="get" class="sp-busca-form" role="search">
+    <label for="sp-busca-detalhada-input" class="sr-only">Termos da busca</label>
+    <input type="search"
+           id="sp-busca-detalhada-input"
+           name="q"
+           value="{{ query }}"
+           placeholder="Buscar por título, objeto, ODS, fase, palavras-chave..."
+           autofocus>
+    <button type="submit" class="btn btn-primary">Buscar</button>
+  </form>
+
+  {% if query %}
+    <p class="sp-pagina-cabecalho__lead">
+      {{ total }} resultado{{ total|pluralize:"s" }} para "<strong>{{ query }}</strong>".
+    </p>
+  {% endif %}
+</header>
+
+{% if query and resultados %}
+  <ul class="sp-busca-resultados">
+    {% for criterio in resultados %}
+      <li class="sp-busca-resultado">
+        <article>
+          <h2><a href="{{ criterio.get_absolute_url }}">{{ criterio.titulo }}</a></h2>
+          <p class="sp-busca-resultado__meta">
+            <span class="sp-badge sp-badge--objeto">{{ criterio.objeto_contratual }}</span>
+            <span class="sp-badge sp-badge--fase">{{ criterio.get_fase_processo_display }}</span>
+            <span class="sp-badge">{{ criterio.codigo }}</span>
+          </p>
+          {% if criterio.snippet %}
+            <p class="sp-busca-resultado__snippet">{{ criterio.snippet|safe }}</p>
+          {% else %}
+            <p class="sp-busca-resultado__snippet">{{ criterio.texto_providencia|striptags|truncatewords:35 }}</p>
+          {% endif %}
+        </article>
+      </li>
+    {% endfor %}
+  </ul>
+  {% include "_partials/_paginacao.html" %}
+{% elif query %}
+  <p class="sp-vazio">
+    Nenhum critério encontrado para "<strong>{{ query }}</strong>".
+    Tente palavras-chave mais gerais ou navegue por <a href="{% url 'criterios:objeto_list' %}">objeto contratual</a>
+    ou <a href="{% url 'criterios:ods_list' %}">ODS</a>.
+  </p>
+{% else %}
+  <p class="sp-busca-hint">Digite um termo na caixa acima para encontrar critérios.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,44 @@
+{% comment %}
+Card reutilizável de critério. Espera: ``criterio``.
+Renderiza título, código, badges (objeto, fase, nível), ODS chips, snippet.
+{% endcomment %}
+<li class="sp-criterio-card">
+  <article>
+    <header class="sp-criterio-card__head">
+      <span class="sp-criterio-card__codigo">{{ criterio.codigo }}</span>
+      <h3 class="sp-criterio-card__titulo">
+        <a href="{{ criterio.get_absolute_url }}">{{ criterio.titulo }}</a>
+      </h3>
+    </header>
+
+    <p class="sp-criterio-card__providencia">{{ criterio.texto_providencia|truncatewords_html:30|safe }}</p>
+
+    <ul class="sp-criterio-card__meta" aria-label="Classificação do critério">
+      <li><span class="sp-badge sp-badge--objeto">{{ criterio.objeto_contratual }}</span></li>
+      <li><span class="sp-badge sp-badge--fase">{{ criterio.get_fase_processo_display }}</span></li>
+      <li>
+        <span class="sp-nivel-ambicao sp-nivel-ambicao--{{ criterio.nivel_ambicao|lower }}" aria-label="Nível de ambição: {{ criterio.get_nivel_ambicao_display }}">
+          <span class="sp-nivel-ambicao__barras" aria-hidden="true">
+            <span class="sp-nivel-ambicao__barra"></span>
+            <span class="sp-nivel-ambicao__barra"></span>
+            <span class="sp-nivel-ambicao__barra"></span>
+          </span>
+          {{ criterio.get_nivel_ambicao_display }}
+        </span>
+      </li>
+    </ul>
+
+    {% if criterio.ods.all %}
+      <ul class="sp-criterio-card__ods" aria-label="ODS aplicáveis">
+        {% for o in criterio.ods.all %}
+          <li>
+            <span class="sp-badge-ods sp-badge-ods--ods-{{ o.numero }}"
+                  style="background-color: {{ o.cor_hex }};"
+                  aria-label="ODS {{ o.numero }} — {{ o.nome }}"
+                  title="ODS {{ o.numero }} — {{ o.nome }}">{{ o.numero }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </article>
+</li>

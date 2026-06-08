@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load pescp_tags %}
+
+{% block title %}{{ objeto.nome }} — Objetos contratuais — PESCP | Governo de SP{% endblock %}
+
+{% block content %}
+<nav class="breadcrumb" aria-label="Trilha de navegação">
+  <a href="{% url 'criterios:home' %}">Início</a>
+  <span class="breadcrumb-sep">›</span>
+  <a href="{% url 'criterios:objeto_list' %}">Objetos</a>
+  {% if objeto.parent %}
+    <span class="breadcrumb-sep">›</span>
+    <a href="{{ objeto.parent.get_absolute_url }}">{{ objeto.parent.nome }}</a>
+  {% endif %}
+  <span class="breadcrumb-sep">›</span>
+  <span aria-current="page">{{ objeto.nome }}</span>
+</nav>
+
+<header class="sp-pagina-cabecalho">
+  <h1>{{ objeto.nome }}</h1>
+  {% if objeto.descricao %}
+    <p class="sp-pagina-cabecalho__lead">{{ objeto.descricao }}</p>
+  {% endif %}
+  <p class="sp-pagina-cabecalho__meta">
+    {{ total_resultados }} critério{{ total_resultados|pluralize:"s" }} aplicável{{ total_resultados|pluralize:"is" }}
+  </p>
+</header>
+
+<div class="sp-listagem">
+  {% include "_partials/_facetas.html" %}
+
+  <section class="sp-resultados" aria-label="Critérios deste objeto">
+    {% if criterios %}
+      <ul class="sp-criterio-lista">
+        {% for criterio in criterios %}
+          {% include "criterios/_criterio_card.html" with criterio=criterio only %}
+        {% endfor %}
+      </ul>
+      {% include "_partials/_paginacao.html" %}
+    {% else %}
+      <p class="sp-vazio">Nenhum critério publicado para este objeto ainda.</p>
+    {% endif %}
+
+    {% if documentos %}
+      <section class="sp-documentos-apoio" aria-labelledby="documentos-titulo">
+        <h2 id="documentos-titulo">Documentos de apoio</h2>
+        <ul>
+          {% for doc in documentos %}
+            <li>
+              <a href="{{ doc.arquivo.url }}" download>
+                <svg class="sp-icon" aria-hidden="true" focusable="false"><use href="#icon-download"/></svg>
+                {{ doc.titulo }}
+                <span class="sp-documentos-apoio__meta">{{ doc.get_tipo_display }} · {{ doc.extensao|upper }}</span>
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </section>
+    {% endif %}
+  </section>
+</div>
+{% endblock %}

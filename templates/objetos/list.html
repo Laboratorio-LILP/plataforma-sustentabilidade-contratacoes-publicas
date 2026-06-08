@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load pescp_tags %}
+
+{% block title %}Objetos contratuais — PESCP | Governo de SP{% endblock %}
+
+{% block content %}
+<nav class="breadcrumb" aria-label="Trilha de navegação">
+  <a href="{% url 'criterios:home' %}">Início</a>
+  <span class="breadcrumb-sep">›</span>
+  <span aria-current="page">Objetos contratuais</span>
+</nav>
+
+<header class="sp-pagina-cabecalho">
+  <h1>Objetos contratuais</h1>
+  <p class="sp-pagina-cabecalho__lead">
+    Taxonomia de objetos cobertos pelos critérios PESCP, organizada em supercategorias e categorias.
+    Clique em uma categoria para ver todos os critérios aplicáveis.
+  </p>
+</header>
+
+<div class="sp-objetos-arvore">
+  {% for super in supercategorias %}
+    <section class="sp-objetos-super" aria-labelledby="super-{{ super.slug }}">
+      <h2 id="super-{{ super.slug }}" class="sp-objetos-super__titulo">
+        <a href="{{ super.get_absolute_url }}">{{ super.nome }}</a>
+        <span class="sp-objetos-super__contagem">{{ super.total }} {{ super.total|pluralize_pt:"critério" }}</span>
+      </h2>
+      {% if super.descricao %}
+        <p class="sp-objetos-super__descricao">{{ super.descricao }}</p>
+      {% endif %}
+      {% if super.filhos.all %}
+        <ul class="sp-objetos-categorias">
+          {% for cat in super.filhos.all %}
+            <li>
+              <a href="{{ cat.get_absolute_url }}">
+                <span class="sp-objetos-categorias__nome">{{ cat.nome }}</span>
+                <span class="sp-objetos-categorias__contagem">{{ cat.total }}</span>
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </section>
+  {% empty %}
+    <p class="sp-vazio">Nenhum objeto contratual cadastrado ainda. Importe a planilha de seed para popular.</p>
+  {% endfor %}
+</div>
+{% endblock %}

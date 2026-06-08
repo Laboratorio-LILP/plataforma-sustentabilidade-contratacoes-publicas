@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+{% load static pescp_tags %}
+
+{% block title %}Início — PESCP — Plataforma Estadual de Sustentabilidade em Contratações Públicas | Governo de SP{% endblock %}
+
+{% block content %}
+<section class="hero" aria-labelledby="hero-titulo">
+  <div class="hero__interior">
+    <h1 id="hero-titulo">Critérios de sustentabilidade prontos para uso em licitações do Estado</h1>
+    <p class="hero__lead">
+      Instrumento digital e consultivo do LILP/SGGD para integrar critérios socioambientais em ETP, Termo de Referência,
+      edital, contrato e fiscalização. Compilado do Guia AGU 2024, Guia PMSP 2025 e materiais complementares,
+      organizado pelos 17 ODS da Agenda 2030.
+    </p>
+    <form action="{% url 'criterios:buscar' %}" method="get" class="search-form-hero" role="search" aria-label="Busca rápida nos critérios">
+      <label for="hero-q" class="sr-only">Termos da busca</label>
+      <input type="text" id="hero-q" name="q" placeholder="Buscar por objeto, ODS, fase do processo..." class="search-input-hero">
+      <button type="submit" class="btn btn-primary btn-hero">Buscar critérios</button>
+    </form>
+  </div>
+  <small class="hero__credito">
+    Foto: <a href="https://commons.wikimedia.org/wiki/File:A_Serra_do_Mar_e_a_Baixada_Santista.jpg"
+            target="_blank" rel="noopener noreferrer">Serra do Mar e Baixada Santista</a>
+    · Felipechagascarvalho ·
+    <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>
+  </small>
+</section>
+
+<section class="sp-stats" aria-label="Estatísticas da plataforma">
+  <ul class="sp-stats__lista">
+    <li class="sp-stats__item">
+      <strong class="sp-stats__numero">{{ total_criterios|default:"0" }}</strong>
+      <span class="sp-stats__rotulo">critérios publicados</span>
+    </li>
+    <li class="sp-stats__item">
+      <strong class="sp-stats__numero">{{ total_objetos|default:"0" }}</strong>
+      <span class="sp-stats__rotulo">objetos contratuais</span>
+    </li>
+    <li class="sp-stats__item">
+      <strong class="sp-stats__numero">{{ total_ods|default:"0" }}</strong>
+      <span class="sp-stats__rotulo">ODS conectados</span>
+    </li>
+    <li class="sp-stats__item">
+      <strong class="sp-stats__numero">5</strong>
+      <span class="sp-stats__rotulo">fases do processo</span>
+      <span class="sp-stats__detalhe">ETP · TR/PB · Edital · Execução · Fiscalização</span>
+    </li>
+  </ul>
+</section>
+
+<section class="sp-acesso-rapido" aria-labelledby="entradas-titulo">
+  <h2 id="entradas-titulo">Acesso rápido</h2>
+  <div class="grid sp-acesso-rapido__grid">
+    <a href="{% url 'criterios:objeto_list' %}" class="card sp-card-acesso">
+      <span class="sp-card-acesso__icone" aria-hidden="true"><svg class="sp-icon" focusable="false"><use href="#icon-menu"/></svg></span>
+      <h3>Por objeto contratual</h3>
+      <p>Pilhas, veículos, limpeza, obras, TI, alimentação, papel — explore a taxonomia de objetos do Guia AGU.</p>
+    </a>
+    <a href="{% url 'criterios:ods_list' %}" class="card sp-card-acesso">
+      <span class="sp-card-acesso__icone" aria-hidden="true"><svg class="sp-icon" focusable="false"><use href="#icon-folha"/></svg></span>
+      <h3>Por ODS da Agenda 2030</h3>
+      <p>Identifique critérios que contribuem para cada um dos 17 Objetivos de Desenvolvimento Sustentável da ONU.</p>
+    </a>
+  </div>
+
+  <nav class="sp-fases-rapidas" aria-labelledby="fases-rapidas-titulo">
+    <h3 id="fases-rapidas-titulo" class="sp-fases-rapidas__titulo">
+      <span class="sp-fases-rapidas__icone" aria-hidden="true"><svg class="sp-icon" focusable="false"><use href="#icon-balanca"/></svg></span>
+      Por fase do processo
+    </h3>
+    <ul class="sp-fases-rapidas__chips">
+      <li><a href="{% url 'criterios:fase_detail' slug='etp' %}">
+        <span class="sp-fases-rapidas__sigla">ETP</span>
+        <span class="sp-fases-rapidas__rotulo">Estudo Técnico Preliminar</span>
+      </a></li>
+      <li><a href="{% url 'criterios:fase_detail' slug='tr-pb' %}">
+        <span class="sp-fases-rapidas__sigla">TR/PB</span>
+        <span class="sp-fases-rapidas__rotulo">Termo de Referência / Projeto Básico</span>
+      </a></li>
+      <li><a href="{% url 'criterios:fase_detail' slug='edital' %}">
+        <span class="sp-fases-rapidas__sigla">Edital</span>
+        <span class="sp-fases-rapidas__rotulo">Edital de Licitação</span>
+      </a></li>
+      <li><a href="{% url 'criterios:fase_detail' slug='execucao' %}">
+        <span class="sp-fases-rapidas__sigla">Execução</span>
+        <span class="sp-fases-rapidas__rotulo">Execução Contratual</span>
+      </a></li>
+      <li><a href="{% url 'criterios:fase_detail' slug='fiscalizacao' %}">
+        <span class="sp-fases-rapidas__sigla">Fiscalização</span>
+        <span class="sp-fases-rapidas__rotulo">Fiscalização do Contrato</span>
+      </a></li>
+    </ul>
+  </nav>
+</section>
+
+{% if objetos_super %}
+<section class="sp-secao sp-objetos-destaque" aria-labelledby="objetos-destaque-titulo">
+  <h2 id="objetos-destaque-titulo">Objetos contratuais em destaque</h2>
+  <ul class="sp-objetos-destaque__grid" role="list">
+    {% for objeto in objetos_super %}
+      {% objeto_icone objeto.slug as icone_id %}
+      <li>
+        <a href="{{ objeto.get_absolute_url }}" class="sp-objeto-card">
+          <span class="sp-objeto-card__icone" aria-hidden="true">
+            <svg class="sp-icon" focusable="false"><use href="#{{ icone_id }}"/></svg>
+          </span>
+          <span class="sp-objeto-card__corpo">
+            <span class="sp-objeto-card__nome">{{ objeto.nome }}</span>
+            {% if objeto.filhos_destaque %}
+              <span class="sp-objeto-card__sublista">
+                {% for filho in objeto.filhos_destaque %}<span class="sp-objeto-card__sub">{{ filho.nome }}</span>{% if not forloop.last %}<span class="sp-objeto-card__sep" aria-hidden="true">·</span>{% endif %}{% endfor %}
+              </span>
+            {% elif objeto.descricao %}
+              <span class="sp-objeto-card__descricao">{{ objeto.descricao|truncatewords:14 }}</span>
+            {% endif %}
+          </span>
+          <span class="sp-objeto-card__total">
+            <strong>{{ objeto.total }}</strong>
+            <span>{{ objeto.total|pluralize_pt:"critério" }}</span>
+          </span>
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+</section>
+{% endif %}
+
+{% if criterios_recentes %}
+<section class="sp-secao" aria-labelledby="recentes-titulo">
+  <h2 id="recentes-titulo">Critérios publicados recentemente</h2>
+  <ul class="sp-criterio-lista">
+    {% for c in criterios_recentes %}
+      {% include "criterios/_criterio_card.html" with criterio=c only %}
+    {% endfor %}
+  </ul>
+  <p class="sp-cta-link">
+    <a href="{% url 'criterios:list' %}">Ver todos os critérios →</a>
+  </p>
+</section>
+{% endif %}
+{% endblock %}

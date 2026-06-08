@@ -1,0 +1,20 @@
+{% comment %}
+Faixa amarela discreta logo abaixo da barra GovSP — visível em todas as
+páginas até o lançamento oficial (Dezembro/2026). Pode ser fechada por
+sessão (não persiste entre sessões), conforme prompt institucional.
+{% endcomment %}
+<div class="sp-aviso-versao" role="region" aria-label="Aviso de versão" data-aviso-versao>
+  <div class="sp-aviso-versao__inner">
+    <span class="sp-aviso-versao__texto">
+      <strong>Versão {{ pescp_versao|default:"1.0" }} ({{ pescp_data|default:"junho/2026" }})</strong>
+      — conteúdo em validação contínua. Sua sugestão é bem-vinda:
+      <a href="mailto:{{ pescp_contato_email|default:'lab.sggd@sp.gov.br' }}">{{ pescp_contato_email|default:"lab.sggd@sp.gov.br" }}</a>.
+    </span>
+    <button type="button"
+            class="sp-aviso-versao__fechar"
+            data-aviso-fechar
+            aria-label="Fechar aviso de versão">
+      <svg class="sp-icon" aria-hidden="true" focusable="false"><use href="#icon-fechar"/></svg>
+    </button>
+  </div>
+</div>

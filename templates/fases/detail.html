@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load pescp_tags %}
+
+{% block title %}{{ fase_rotulo }} — Fases do processo — PESCP | Governo de SP{% endblock %}
+
+{% block content %}
+<nav class="breadcrumb" aria-label="Trilha de navegação">
+  <a href="{% url 'criterios:home' %}">Início</a>
+  <span class="breadcrumb-sep">›</span>
+  <span>Fases do processo</span>
+  <span class="breadcrumb-sep">›</span>
+  <span aria-current="page">{{ fase_rotulo }}</span>
+</nav>
+
+<header class="sp-pagina-cabecalho">
+  <h1>{{ fase_rotulo }}</h1>
+  <p class="sp-pagina-cabecalho__lead">
+    Critérios PESCP que devem ser considerados durante a fase <strong>{{ fase_rotulo }}</strong> do processo de contratação.
+  </p>
+  <p class="sp-pagina-cabecalho__meta">
+    {{ total_resultados }} critério{{ total_resultados|pluralize:"s" }} para esta fase
+  </p>
+</header>
+
+<div class="sp-listagem">
+  {% include "_partials/_facetas.html" %}
+
+  <section class="sp-resultados" aria-label="Critérios desta fase">
+    {% if criterios %}
+      <ul class="sp-criterio-lista">
+        {% for criterio in criterios %}
+          {% include "criterios/_criterio_card.html" with criterio=criterio only %}
+        {% endfor %}
+      </ul>
+      {% include "_partials/_paginacao.html" %}
+    {% else %}
+      <p class="sp-vazio">Nenhum critério publicado para esta fase ainda.</p>
+    {% endif %}
+  </section>
+</div>
+{% endblock %}

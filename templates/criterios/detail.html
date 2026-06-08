@@ -1,0 +1,192 @@
+{% extends "base.html" %}
+{% load pescp_tags %}
+
+{% block title %}{{ criterio.titulo }} — PESCP | Governo de SP{% endblock %}
+{% block meta_description %}{{ criterio.texto_providencia|striptags|truncatewords:25 }}{% endblock %}
+
+{% block content %}
+<nav class="breadcrumb" aria-label="Trilha de navegação">
+  <a href="{% url 'criterios:home' %}">Início</a>
+  <span class="breadcrumb-sep">›</span>
+  <a href="{% url 'criterios:objeto_list' %}">Objetos</a>
+  <span class="breadcrumb-sep">›</span>
+  <a href="{{ criterio.objeto_contratual.get_absolute_url }}">{{ criterio.objeto_contratual }}</a>
+  <span class="breadcrumb-sep">›</span>
+  <span aria-current="page">{{ criterio.titulo|truncatewords:8 }}</span>
+</nav>
+
+<article class="sp-criterio-detalhe">
+  <header class="sp-criterio-detalhe__cabecalho">
+    <p class="sp-criterio-detalhe__codigo"><strong>{{ criterio.codigo }}</strong></p>
+    <h1 class="sp-criterio-detalhe__titulo">{{ criterio.titulo }}</h1>
+
+    <ul class="sp-criterio-detalhe__meta" aria-label="Classificação do critério">
+      <li><span class="sp-badge sp-badge--objeto">{{ criterio.objeto_contratual }}</span></li>
+      <li><span class="sp-badge sp-badge--tipo">{{ criterio.get_tipo_contratacao_display }}</span></li>
+      <li><span class="sp-badge sp-badge--fase">{{ criterio.get_fase_processo_display }}</span></li>
+      <li>
+        <span class="sp-nivel-ambicao sp-nivel-ambicao--{{ criterio.nivel_ambicao|lower }}">
+          <span class="sp-nivel-ambicao__barras" aria-hidden="true">
+            <span class="sp-nivel-ambicao__barra"></span>
+            <span class="sp-nivel-ambicao__barra"></span>
+            <span class="sp-nivel-ambicao__barra"></span>
+          </span>
+          Nível {{ criterio.get_nivel_ambicao_display }}
+        </span>
+      </li>
+    </ul>
+
+    {% if criterio.ods.all %}
+      <div class="sp-criterio-detalhe__ods" aria-label="ODS aplicáveis">
+        <span class="sp-criterio-detalhe__ods-rotulo">Contribui para os ODS:</span>
+        <ul>
+          {% for o in criterio.ods.all %}
+            <li>
+              <a href="{{ o.get_absolute_url }}"
+                 class="sp-badge-ods sp-badge-ods--ods-{{ o.numero }}"
+                 style="background-color: {{ o.cor_hex }};"
+                 title="ODS {{ o.numero }} — {{ o.nome }}">
+                {{ o.numero }} <span class="sp-badge-ods__rotulo">{{ o.nome }}</span>
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+
+    <div class="sp-criterio-detalhe__acoes">
+      <a href="{% url 'exportacao:criterio_pdf' criterio.slug %}"
+         class="btn btn-secondary"
+         aria-label="Exportar este critério em PDF">
+        <svg class="sp-icon" aria-hidden="true" focusable="false"><use href="#icon-pdf"/></svg>
+        Exportar PDF
+      </a>
+      <a href="{% url 'exportacao:criterio_docx' criterio.slug %}"
+         class="btn btn-secondary"
+         aria-label="Exportar este critério em DOCX">
+        <svg class="sp-icon" aria-hidden="true" focusable="false"><use href="#icon-docx"/></svg>
+        Exportar DOCX
+      </a>
+    </div>
+  </header>
+
+  {# ---------- Bloco "Texto pronto para inserção" ---------- #}
+  <section class="sp-bloco-providencia" aria-labelledby="providencia-titulo">
+    <header class="sp-bloco-providencia__cabecalho">
+      <h2 id="providencia-titulo">Texto pronto para inserção</h2>
+      <button type="button"
+              class="btn btn-primary btn-sm"
+              data-copiar-target="#providencia-conteudo"
+              aria-label="Copiar texto da providência">
+        <svg class="sp-icon" aria-hidden="true" focusable="false"><use href="#icon-copiar"/></svg>
+        Copiar
+      </button>
+    </header>
+    <div id="providencia-conteudo" class="sp-bloco-providencia__conteudo">
+      {{ criterio.texto_providencia|safe }}
+    </div>
+    <p class="sp-bloco-providencia__hint">
+      Este trecho pode ser copiado diretamente para o seu Estudo Técnico Preliminar, Termo de Referência,
+      edital ou contrato. Adapte ao caso concreto antes de incluir.
+    </p>
+  </section>
+
+  <section aria-labelledby="determinacoes-titulo">
+    <h2 id="determinacoes-titulo">Determinações Principais</h2>
+    <div class="sp-conteudo-rico">{{ criterio.determinacoes_principais|safe }}</div>
+  </section>
+
+  <section aria-labelledby="justificativa-titulo">
+    <h2 id="justificativa-titulo">Justificativa Técnica</h2>
+    <div class="sp-conteudo-rico">{{ criterio.justificativa_tecnica|safe }}</div>
+  </section>
+
+  <section aria-labelledby="verificacao-titulo">
+    <h2 id="verificacao-titulo">Método de Verificação</h2>
+    <div class="sp-conteudo-rico">{{ criterio.metodo_verificacao|safe }}</div>
+  </section>
+
+  {% if criterio.precaucoes %}
+    <section aria-labelledby="precaucoes-titulo" class="sp-precaucoes">
+      <h2 id="precaucoes-titulo">Precauções e Ressalvas</h2>
+      <div class="sp-conteudo-rico">{{ criterio.precaucoes|safe }}</div>
+    </section>
+  {% endif %}
+
+  {# ---------- Referências ---------- #}
+  <section class="sp-referencias" aria-labelledby="referencias-titulo">
+    <h2 id="referencias-titulo">Referências</h2>
+
+    {% if criterio.normas.all %}
+      <div class="sp-referencias__grupo">
+        <h3>Normas legais</h3>
+        <ul>
+          {% for norma in criterio.normas.all %}
+            <li>
+              {% if norma.link_oficial %}
+                <a href="{{ norma.link_oficial }}" target="_blank" rel="noopener noreferrer">
+                  {{ norma.titulo_curto }}
+                  <svg class="sp-icon" aria-hidden="true" focusable="false"><use href="#icon-externo"/></svg>
+                </a>
+              {% else %}
+                {{ norma.titulo_curto }}
+              {% endif %}
+              {% if norma.revogada %}<span class="sp-badge sp-badge--alerta">Revogada</span>{% endif %}
+              {% if norma.titulo_completo != norma.titulo_curto %}
+                <p class="sp-referencias__detalhe">{{ norma.titulo_completo }}</p>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+
+    {% if criterio.selos.all %}
+      <div class="sp-referencias__grupo">
+        <h3>Selos e certificações aceitos</h3>
+        <ul>
+          {% for selo in criterio.selos.all %}
+            <li>
+              {% if selo.link_oficial %}
+                <a href="{{ selo.link_oficial }}" target="_blank" rel="noopener noreferrer">
+                  {{ selo.nome }}
+                  <svg class="sp-icon" aria-hidden="true" focusable="false"><use href="#icon-externo"/></svg>
+                </a>
+              {% else %}
+                {{ selo.nome }}
+              {% endif %}
+              {% if selo.descricao %}<p class="sp-referencias__detalhe">{{ selo.descricao|truncatewords:20 }}</p>{% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+
+    {% if criterio.tags.all %}
+      <div class="sp-referencias__grupo">
+        <h3>Tags</h3>
+        <ul class="sp-tag-lista">
+          {% for tag in criterio.tags.all %}
+            <li><span class="sp-tag">{{ tag.nome }}</span></li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+
+    {% if criterio.fonte %}
+      <p class="sp-referencias__fonte"><strong>Fonte:</strong> {{ criterio.fonte }}</p>
+    {% endif %}
+  </section>
+</article>
+
+{% if relacionados %}
+<section class="sp-relacionados" aria-labelledby="relacionados-titulo">
+  <h2 id="relacionados-titulo">Critérios relacionados</h2>
+  <ul class="sp-criterio-lista">
+    {% for c in relacionados %}
+      {% include "criterios/_criterio_card.html" with criterio=c only %}
+    {% endfor %}
+  </ul>
+</section>
+{% endif %}
+{% endblock %}

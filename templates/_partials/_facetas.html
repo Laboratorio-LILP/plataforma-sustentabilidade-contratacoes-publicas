@@ -1,0 +1,100 @@
+{% comment %}
+Sidebar de facetas — recebe ``facetas`` no contexto (lista de Faceta).
+Estrutura:
+  1. Header com ícone + título.
+  2. Chips de filtros ativos (cada um removível) + botão Limpar.
+  3. Grupos colapsáveis via <details/summary> — abertos por padrão.
+Sem JavaScript: usa elementos nativos do HTML.
+{% endcomment %}
+{% load pescp_tags %}
+<aside class="sp-facetas" aria-label="Filtros de critérios">
+  <header class="sp-facetas__header">
+    <h2 class="sp-facetas__titulo">
+      <svg class="sp-facetas__icone" aria-hidden="true" focusable="false" viewBox="0 0 24 24">
+        <path d="M3 5h18l-7 9v6l-4-2v-4z" fill="currentColor"/>
+      </svg>
+      Filtros
+    </h2>
+  </header>
+
+  {% if request.GET %}
+    <div class="sp-facetas__ativos" aria-labelledby="filtros-ativos-titulo">
+      <div class="sp-facetas__ativos-header">
+        <h3 id="filtros-ativos-titulo" class="sp-facetas__ativos-titulo">Filtros ativos</h3>
+        <a class="sp-facetas__limpar" href="{{ request.path }}">Limpar tudo</a>
+      </div>
+      <ul class="sp-facetas-chips">
+        {% for faceta in facetas %}{% for opcao in faceta.opcoes %}{% if opcao.ativa %}
+          <li>
+            <a class="sp-facetas-chip"
+               href="?{% url_toggle_facet faceta.chave opcao.valor %}"
+               aria-label="Remover filtro {{ faceta.rotulo }}: {{ opcao.rotulo }}">
+              <span class="sp-facetas-chip__categoria">{{ faceta.rotulo }}:</span>
+              <span class="sp-facetas-chip__rotulo">{{ opcao.rotulo }}</span>
+              <span class="sp-facetas-chip__x" aria-hidden="true">×</span>
+            </a>
+          </li>
+        {% endif %}{% endfor %}{% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+
+  {% for faceta in facetas %}
+    {% if faceta.tem_opcoes %}
+      <details class="sp-facetas__grupo" open>
+        <summary class="sp-facetas__rotulo">
+          <span class="sp-facetas__rotulo-texto">{{ faceta.rotulo }}</span>
+          <svg class="sp-facetas__chevron" aria-hidden="true" focusable="false" viewBox="0 0 12 8">
+            <path d="M1 2 L6 6.5 L11 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </summary>
+        <ul class="sp-facetas__opcoes">
+          {% for opcao in faceta.opcoes|slice:":8" %}
+            <li>
+              <a href="?{% url_toggle_facet faceta.chave opcao.valor %}"
+                 class="sp-facetas__opcao {% if opcao.ativa %}sp-facetas__opcao--ativa{% endif %}"
+                 aria-pressed="{{ opcao.ativa|yesno:'true,false' }}">
+                <span class="sp-facetas__caixa" aria-hidden="true">
+                  {% if opcao.ativa %}
+                    <svg viewBox="0 0 12 10" focusable="false">
+                      <path d="M1 5 L4.5 8.5 L11 1.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  {% endif %}
+                </span>
+                <span class="sp-facetas__opcao-rotulo">{{ opcao.rotulo }}</span>
+                <span class="sp-facetas__opcao-contagem">{{ opcao.contagem }}</span>
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+        {% if faceta.opcoes|length > 8 %}
+          <details class="sp-facetas__mais">
+            <summary class="sp-facetas__mais-botao">
+              <span class="sp-facetas__mais-mostrar">Carregar mais ({{ faceta.opcoes|length|add:"-8" }})</span>
+              <span class="sp-facetas__mais-recolher">Mostrar menos</span>
+            </summary>
+            <ul class="sp-facetas__opcoes sp-facetas__opcoes--extras">
+              {% for opcao in faceta.opcoes|slice:"8:" %}
+                <li>
+                  <a href="?{% url_toggle_facet faceta.chave opcao.valor %}"
+                     class="sp-facetas__opcao {% if opcao.ativa %}sp-facetas__opcao--ativa{% endif %}"
+                     aria-pressed="{{ opcao.ativa|yesno:'true,false' }}">
+                    <span class="sp-facetas__caixa" aria-hidden="true">
+                      {% if opcao.ativa %}
+                        <svg viewBox="0 0 12 10" focusable="false">
+                          <path d="M1 5 L4.5 8.5 L11 1.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                      {% endif %}
+                    </span>
+                    <span class="sp-facetas__opcao-rotulo">{{ opcao.rotulo }}</span>
+                    <span class="sp-facetas__opcao-contagem">{{ opcao.contagem }}</span>
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+          </details>
+        {% endif %}
+      </details>
+    {% endif %}
+  {% endfor %}
+</aside>

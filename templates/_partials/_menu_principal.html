@@ -1,0 +1,27 @@
+{% comment %}
+Menu principal — 8 itens. ``aria-current="page"`` aplicado pelo
+context processor ``site_context`` via ``current_url_name``.
+{% endcomment %}
+<nav id="sp-menu" class="sp-menu-principal" role="navigation" aria-label="Menu principal">
+  <div class="sp-menu-principal__inner">
+    <button type="button"
+            class="sp-menu-principal__toggle"
+            aria-expanded="false"
+            aria-controls="sp-menu-lista"
+            aria-label="Abrir menu de navegação">
+      <svg class="sp-icon" aria-hidden="true" focusable="false"><use href="#icon-menu"/></svg>
+      <span class="sp-menu-principal__toggle-label">Menu</span>
+    </button>
+
+    <ul id="sp-menu-lista" class="sp-menu-principal__lista">
+      <li><a href="{% url 'criterios:home' %}"        {% if current_url_name == 'criterios:home' %}aria-current="page"{% endif %}>Início</a></li>
+      <li><a href="{% url 'criterios:list' %}"        {% if current_url_name == 'criterios:list' or current_url_name == 'criterios:criterio_detail' %}aria-current="page"{% endif %}>Critérios</a></li>
+      <li><a href="{% url 'criterios:objeto_list' %}" {% if current_url_name == 'criterios:objeto_list' or current_url_name == 'criterios:objeto_detail' %}aria-current="page"{% endif %}>Objetos</a></li>
+      <li><a href="{% url 'criterios:ods_list' %}"    {% if current_url_name == 'criterios:ods_list' or current_url_name == 'criterios:ods_detail' %}aria-current="page"{% endif %}>ODS</a></li>
+      <li><a href="{% url 'criterios:glossario' %}"   {% if current_url_name == 'criterios:glossario' %}aria-current="page"{% endif %}>Glossário</a></li>
+      <li><a href="{% url 'conteudo:sobre' %}"        {% if current_url_name == 'conteudo:sobre' %}aria-current="page"{% endif %}>Sobre</a></li>
+      <li><a href="{% url 'conteudo:metodologia' %}"  {% if current_url_name == 'conteudo:metodologia' %}aria-current="page"{% endif %}>Metodologia</a></li>
+      <li><a href="{% url 'conteudo:contato' %}"      {% if current_url_name == 'conteudo:contato' %}aria-current="page"{% endif %}>Contato</a></li>
+    </ul>
+  </div>
+</nav>

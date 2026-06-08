@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>{{ criterio.codigo }} — {{ criterio.titulo }}</title>
+<style>
+  @page {
+    size: A4;
+    margin: 22mm 18mm 22mm 18mm;
+    @top-center {
+      content: "Governo do Estado de São Paulo — Plataforma Estadual de Sustentabilidade em Contratações Públicas";
+      font-family: Verdana, Arial, sans-serif;
+      font-size: 8pt;
+      color: #808080;
+      border-bottom: 0.5pt solid #BFBFBF;
+      padding-bottom: 4pt;
+    }
+    @bottom-left {
+      content: "PESCP v{{ pescp.VERSAO_ROTULO|default:'1.0' }} — gerado em " counter(page) " / " counter(pages);
+      font-family: Verdana, Arial, sans-serif;
+      font-size: 8pt;
+      color: #808080;
+    }
+    @bottom-right {
+      content: "{{ public_url }}{{ criterio.get_absolute_url }}";
+      font-family: Verdana, Arial, sans-serif;
+      font-size: 8pt;
+      color: #808080;
+    }
+  }
+
+  html, body {
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 10pt;
+    line-height: 1.45;
+    color: #212121;
+  }
+  h1 {
+    font-size: 17pt;
+    color: #000;
+    margin-bottom: 4pt;
+    border-bottom: 2pt solid #ED1C24;
+    padding-bottom: 4pt;
+  }
+  h2 {
+    font-size: 12pt;
+    color: #000;
+    margin: 14pt 0 4pt 0;
+    border-left: 3pt solid #ED1C24;
+    padding-left: 6pt;
+  }
+  .codigo {
+    font-size: 9pt;
+    color: #808080;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 4pt;
+  }
+  .meta {
+    margin: 8pt 0 12pt 0;
+    font-size: 9pt;
+  }
+  .meta .badge {
+    display: inline-block;
+    background: #F5F5F5;
+    border: 0.5pt solid #BFBFBF;
+    padding: 1pt 6pt;
+    border-radius: 2pt;
+    margin-right: 4pt;
+  }
+  .ods-list {
+    margin: 8pt 0;
+  }
+  .ods-list .ods {
+    display: inline-block;
+    color: #fff;
+    padding: 2pt 6pt;
+    border-radius: 2pt;
+    font-weight: 700;
+    font-size: 9pt;
+    margin-right: 3pt;
+  }
+  .providencia {
+    background: #F5F5F5;
+    border-left: 3pt solid #ED1C24;
+    padding: 8pt 10pt;
+    margin: 6pt 0 10pt 0;
+    font-size: 10.5pt;
+  }
+  .providencia__rotulo {
+    font-size: 8pt;
+    text-transform: uppercase;
+    color: #ED1C24;
+    font-weight: 700;
+    margin-bottom: 4pt;
+    display: block;
+  }
+  .referencias {
+    margin-top: 14pt;
+    border-top: 0.5pt solid #BFBFBF;
+    padding-top: 8pt;
+    font-size: 9pt;
+  }
+  .referencias h3 {
+    font-size: 10pt;
+    color: #000;
+    margin: 6pt 0 3pt 0;
+  }
+  .referencias ul {
+    margin: 0 0 6pt 16pt;
+    padding: 0;
+  }
+  .fonte {
+    margin-top: 6pt;
+    font-style: italic;
+    color: #404040;
+  }
+  .aviso-final {
+    margin-top: 16pt;
+    padding: 6pt 8pt;
+    border: 0.5pt solid #FBB900;
+    background: #FFF8E1;
+    font-size: 8.5pt;
+    color: #404040;
+  }
+</style>
+</head>
+<body>
+  <p class="codigo">{{ criterio.codigo }}</p>
+  <h1>{{ criterio.titulo }}</h1>
+
+  <div class="meta">
+    <span class="badge">{{ criterio.objeto_contratual }}</span>
+    <span class="badge">{{ criterio.get_tipo_contratacao_display }}</span>
+    <span class="badge">{{ criterio.get_fase_processo_display }}</span>
+    <span class="badge">Nível {{ criterio.get_nivel_ambicao_display }}</span>
+  </div>
+
+  {% if criterio.ods.all %}
+    <div class="ods-list">
+      <strong>ODS:</strong>
+      {% for o in criterio.ods.all %}
+        <span class="ods" style="background-color: {{ o.cor_hex }};">{{ o.numero }}</span>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <h2>Texto pronto para inserção em {{ criterio.get_fase_processo_display }}</h2>
+  <div class="providencia">
+    <span class="providencia__rotulo">Providência a ser tomada</span>
+    {{ criterio.texto_providencia|safe }}
+  </div>
+
+  <h2>Determinações Principais</h2>
+  <div>{{ criterio.determinacoes_principais|safe }}</div>
+
+  <h2>Justificativa Técnica</h2>
+  <div>{{ criterio.justificativa_tecnica|safe }}</div>
+
+  <h2>Método de Verificação</h2>
+  <div>{{ criterio.metodo_verificacao|safe }}</div>
+
+  {% if criterio.precaucoes %}
+    <h2>Precauções e Ressalvas</h2>
+    <div>{{ criterio.precaucoes|safe }}</div>
+  {% endif %}
+
+  <section class="referencias">
+    {% if criterio.normas.all %}
+      <h3>Normas legais</h3>
+      <ul>
+        {% for norma in criterio.normas.all %}
+          <li>{{ norma.titulo_completo|default:norma.titulo_curto }}{% if norma.link_oficial %} — {{ norma.link_oficial }}{% endif %}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    {% if criterio.selos.all %}
+      <h3>Selos e certificações aceitos</h3>
+      <ul>
+        {% for selo in criterio.selos.all %}
+          <li>{{ selo.nome }}{% if selo.link_oficial %} — {{ selo.link_oficial }}{% endif %}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    {% if criterio.tags.all %}
+      <h3>Tags</h3>
+      <p>{% for tag in criterio.tags.all %}{{ tag.nome }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+    {% endif %}
+
+    {% if criterio.fonte %}
+      <p class="fonte"><strong>Fonte:</strong> {{ criterio.fonte }}</p>
+    {% endif %}
+  </section>
+
+  <p class="aviso-final">
+    Documento gerado pela Plataforma Estadual de Sustentabilidade em Contratações Públicas (PESCP).
+    Versão {{ pescp.VERSAO_ROTULO|default:"1.0" }} — conteúdo em validação contínua. Adapte ao caso concreto
+    antes de inserir em ETP, Termo de Referência, edital ou contrato.
+  </p>
+</body>
+</html>

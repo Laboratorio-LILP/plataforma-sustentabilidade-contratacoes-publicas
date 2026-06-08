@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 600" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Ilustração estilizada de paisagem que evoca a Mata Atlântica do Estado de São Paulo: camadas de morros, sol nascente e vegetação em primeiro plano.">
+  <defs>
+    <linearGradient id="sky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#A8D5F7"/>
+      <stop offset="55%" stop-color="#D9ECFB"/>
+      <stop offset="100%" stop-color="#F4F8E7"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFE38A"/>
+      <stop offset="60%" stop-color="#FBB900"/>
+      <stop offset="100%" stop-color="#FBB900" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1600" height="600" fill="url(#sky)"/>
+
+  <!-- Halo + disco solar -->
+  <circle cx="1180" cy="200" r="180" fill="url(#sun)" opacity="0.95"/>
+  <circle cx="1180" cy="200" r="68" fill="#FFE38A"/>
+
+  <!-- Morros mais distantes (Serra do Mar) -->
+  <path d="M0 330 L120 270 L260 310 L420 240 L560 290 L740 220 L920 280 L1100 230 L1280 270 L1460 240 L1600 270 L1600 600 L0 600 Z"
+        fill="#7CC68F" opacity="0.85"/>
+
+  <!-- Morros médios -->
+  <path d="M0 390 L180 340 L360 380 L540 310 L720 370 L900 320 L1080 370 L1260 320 L1440 360 L1600 340 L1600 600 L0 600 Z"
+        fill="#3FA15F"/>
+
+  <!-- Primeiro plano (Mata Atlântica densa) -->
+  <path d="M0 470 L140 420 L300 450 L480 410 L640 440 L800 400 L960 440 L1140 410 L1320 450 L1500 420 L1600 440 L1600 600 L0 600 Z"
+        fill="#1B5E20"/>
+
+  <!-- Árvores estilizadas em primeiro plano -->
+  <g fill="#0E3D14">
+    <polygon points="50,500 70,460 90,500"/>
+    <polygon points="180,510 202,468 224,510"/>
+    <polygon points="320,505 340,464 360,505"/>
+    <polygon points="460,512 482,470 504,512"/>
+    <polygon points="600,500 622,458 644,500"/>
+    <polygon points="760,508 782,464 804,508"/>
+    <polygon points="920,505 940,462 960,505"/>
+    <polygon points="1080,512 1102,468 1124,512"/>
+    <polygon points="1240,500 1260,460 1280,500"/>
+    <polygon points="1400,508 1422,466 1444,508"/>
+    <polygon points="1540,505 1560,464 1580,505"/>
+  </g>
+
+  <!-- Folhas decorativas -->
+  <g fill="#3FA15F" opacity="0.85">
+    <ellipse cx="120" cy="500" rx="14" ry="6" transform="rotate(-25 120 500)"/>
+    <ellipse cx="260" cy="510" rx="12" ry="5" transform="rotate(30 260 510)"/>
+    <ellipse cx="540" cy="505" rx="14" ry="6" transform="rotate(-20 540 505)"/>
+    <ellipse cx="840" cy="510" rx="12" ry="5" transform="rotate(25 840 510)"/>
+    <ellipse cx="1180" cy="505" rx="14" ry="6" transform="rotate(-30 1180 505)"/>
+    <ellipse cx="1480" cy="510" rx="12" ry="5" transform="rotate(28 1480 510)"/>
+  </g>
+</svg>

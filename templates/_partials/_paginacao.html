@@ -1,0 +1,24 @@
+{% comment %}
+Paginação reutilizável — espera ``page_obj`` e ``paginator`` no contexto.
+{% endcomment %}
+{% load pescp_tags %}
+{% if paginator.num_pages > 1 %}
+<nav class="sp-paginacao" role="navigation" aria-label="Paginação dos resultados">
+  {% if page_obj.has_previous %}
+    <a class="sp-paginacao__link" href="?{% url_replace page=page_obj.previous_page_number %}" rel="prev">← Anterior</a>
+  {% else %}
+    <span class="sp-paginacao__link sp-paginacao__link--disabled" aria-disabled="true">← Anterior</span>
+  {% endif %}
+
+  <span class="sp-paginacao__info">
+    Página {{ page_obj.number }} de {{ paginator.num_pages }}
+    ({{ paginator.count }} resultado{{ paginator.count|pluralize:"s" }})
+  </span>
+
+  {% if page_obj.has_next %}
+    <a class="sp-paginacao__link" href="?{% url_replace page=page_obj.next_page_number %}" rel="next">Próxima →</a>
+  {% else %}
+    <span class="sp-paginacao__link sp-paginacao__link--disabled" aria-disabled="true">Próxima →</span>
+  {% endif %}
+</nav>
+{% endif %}

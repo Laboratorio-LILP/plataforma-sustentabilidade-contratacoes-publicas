@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}Glossário — PESCP | Governo de SP{% endblock %}
+
+{% block content %}
+<nav class="breadcrumb" aria-label="Trilha de navegação">
+  <a href="{% url 'criterios:home' %}">Início</a>
+  <span class="breadcrumb-sep">›</span>
+  <span aria-current="page">Glossário</span>
+</nav>
+
+<article class="sp-glossario">
+  <header class="sp-pagina-cabecalho">
+    <h1>Glossário</h1>
+    <p class="sp-pagina-cabecalho__lead">
+      Definições de siglas e termos técnicos usados nos critérios da PESCP. Cada termo tem âncora própria para
+      facilitar referência em outras páginas (ex.: <code>#etp</code>).
+    </p>
+  </header>
+
+  <nav class="sp-glossario-alfabeto" aria-label="Filtrar por letra inicial">
+    <a href="{{ request.path }}"
+       class="sp-glossario-alfabeto__letra{% if not letra_ativa %} sp-glossario-alfabeto__letra--ativa{% endif %}"
+       {% if not letra_ativa %}aria-current="true"{% endif %}>Todas</a>
+    {% for letra in alfabeto %}
+      {% if letra in letras_disponiveis %}
+        <a href="?letra={{ letra }}"
+           class="sp-glossario-alfabeto__letra{% if letra == letra_ativa %} sp-glossario-alfabeto__letra--ativa{% endif %}"
+           {% if letra == letra_ativa %}aria-current="true"{% endif %}>{{ letra }}</a>
+      {% else %}
+        <span class="sp-glossario-alfabeto__letra sp-glossario-alfabeto__letra--vazia" aria-disabled="true">{{ letra }}</span>
+      {% endif %}
+    {% endfor %}
+  </nav>
+
+  <p class="sp-glossario__contagem" role="status">
+    {% if letra_ativa %}
+      Mostrando {{ termos|length }} termo{{ termos|length|pluralize:"s" }} iniciado{{ termos|length|pluralize:"s" }} por <strong>{{ letra_ativa }}</strong>
+      · <a href="{{ request.path }}">Ver todos ({{ total_geral }})</a>
+    {% else %}
+      {{ total_geral }} termo{{ total_geral|pluralize:"s" }} no glossário
+    {% endif %}
+  </p>
+
+  {% if termos %}
+    <dl class="sp-glossario__lista">
+      {% for termo in termos %}
+        <dt id="{{ termo.slug }}">
+          {% if termo.sigla %}<abbr title="{{ termo.termo }}">{{ termo.sigla }}</abbr> — {% endif %}{{ termo.termo }}
+        </dt>
+        <dd>
+          {{ termo.definicao|linebreaks }}
+          {% if termo.normas_relacionadas.all %}
+            <p class="sp-glossario__normas">
+              <strong>Normas relacionadas:</strong>
+              {% for norma in termo.normas_relacionadas.all %}
+                {{ norma.titulo_curto }}{% if not forloop.last %}; {% endif %}
+              {% endfor %}
+            </p>
+          {% endif %}
+        </dd>
+      {% endfor %}
+    </dl>
+  {% elif letra_ativa %}
+    <p class="sp-vazio">
+      Nenhum termo iniciado por <strong>{{ letra_ativa }}</strong>.
+      <a href="{{ request.path }}">Ver todos os termos</a>.
+    </p>
+  {% else %}
+    <p class="sp-vazio">Glossário ainda não foi populado. Importe a planilha de seed para incluir termos.</p>
+  {% endif %}
+</article>
+{% endblock %}

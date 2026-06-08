@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{% block meta_description %}Plataforma Estadual de Sustentabilidade em Contratações Públicas — instrumento digital e consultivo para integrar critérios de sustentabilidade nas aquisições, contratações e obras do Estado de São Paulo, alinhada à Agenda 2030 da ONU.{% endblock %}">
+    <title>{% block title %}PESCP — Plataforma Estadual de Sustentabilidade em Contratações Públicas | Governo de SP{% endblock %}</title>
+
+    {# Tipografia oficial — Roboto (web), Verdana (fallback conforme Manual GESP v1.6) #}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap">
+
+    {# Folhas de estilo — design system carrega antes para que style.css tenha precedência #}
+    <link rel="stylesheet" href="{% static 'css/sp-design-system.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    {% include "_partials/_icons_sprite.html" %}
+    {% include "_partials/_skip_links.html" %}
+    {% include "_partials/_barra_govsp.html" %}
+    {% include "_partials/_aviso_versao_inicial.html" %}
+
+    {% include "_partials/_header_institucional.html" %}
+    {% include "_partials/_menu_principal.html" %}
+
+    <main id="sp-conteudo" class="main" role="main" tabindex="-1">
+        <div class="container">
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+
+    {% include "_partials/_rodape_institucional.html" %}
+    {% include "_partials/_banner_cookies.html" %}
+
+    <script src="{% static 'js/main.js' %}" defer></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

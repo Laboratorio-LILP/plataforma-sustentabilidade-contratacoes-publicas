@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load pescp_tags %}
+
+{% block title %}ODS {{ ods.numero }} — {{ ods.nome }} — PESCP | Governo de SP{% endblock %}
+{% block meta_description %}{{ ods.descricao_curta|default:ods.nome }}{% endblock %}
+
+{% block content %}
+<nav class="breadcrumb" aria-label="Trilha de navegação">
+  <a href="{% url 'criterios:home' %}">Início</a>
+  <span class="breadcrumb-sep">›</span>
+  <a href="{% url 'criterios:ods_list' %}">ODS</a>
+  <span class="breadcrumb-sep">›</span>
+  <span aria-current="page">ODS {{ ods.numero }}</span>
+</nav>
+
+<header class="sp-ods-detalhe__cabecalho" style="--ods-cor: {{ ods.cor_hex }};">
+  <span class="sp-ods-detalhe__numero" aria-hidden="true">{{ ods.numero }}</span>
+  <div class="sp-ods-detalhe__texto">
+    <p class="sp-ods-detalhe__subtitulo">Objetivo de Desenvolvimento Sustentável nº {{ ods.numero }}</p>
+    <h1>{{ ods.nome }}</h1>
+    {% if ods.descricao_curta %}
+      <p class="sp-ods-detalhe__lead">{{ ods.descricao_curta }}</p>
+    {% endif %}
+  </div>
+</header>
+
+{% if ods.descricao_longa %}
+  <section class="sp-ods-detalhe__descricao" aria-labelledby="descricao-titulo">
+    <h2 id="descricao-titulo">Sobre o ODS {{ ods.numero }}</h2>
+    <div class="sp-conteudo-rico">{{ ods.descricao_longa|linebreaks }}</div>
+  </section>
+{% endif %}
+
+{% if ods.metas %}
+  <section class="sp-ods-detalhe__metas" aria-labelledby="metas-titulo">
+    <h2 id="metas-titulo">Metas oficiais</h2>
+    <ul>
+      {% for meta in ods.metas %}<li>{{ meta }}</li>{% endfor %}
+    </ul>
+  </section>
+{% endif %}
+
+<section aria-labelledby="criterios-titulo">
+  <h2 id="criterios-titulo">Critérios PESCP que ajudam a alcançar este ODS</h2>
+  <p class="sp-pagina-cabecalho__meta">
+    {{ total_resultados }} critério{{ total_resultados|pluralize:"s" }} encontrado{{ total_resultados|pluralize:"s" }}
+  </p>
+
+  <div class="sp-listagem">
+    {% include "_partials/_facetas.html" %}
+
+    <section class="sp-resultados" aria-label="Critérios que contribuem para este ODS">
+      {% if criterios %}
+        <ul class="sp-criterio-lista">
+          {% for criterio in criterios %}
+            {% include "criterios/_criterio_card.html" with criterio=criterio only %}
+          {% endfor %}
+        </ul>
+        {% include "_partials/_paginacao.html" %}
+      {% else %}
+        <p class="sp-vazio">Nenhum critério publicado conectado a este ODS ainda.</p>
+      {% endif %}
+    </section>
+  </div>
+</section>
+{% endblock %}

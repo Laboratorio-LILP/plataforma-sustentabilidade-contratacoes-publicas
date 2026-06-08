@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% load pescp_tags %}
+
+{% block title %}Metodologia — PESCP — Plataforma Estadual de Sustentabilidade em Contratações Públicas | Governo de SP{% endblock %}
+{% block meta_description %}Metodologia editorial da PESCP: anatomia das fichas de critério em cinco seções, classificação em três dimensões e inspiração internacional.{% endblock %}
+
+{% block content %}
+<nav class="breadcrumb" aria-label="Trilha de navegação">
+  <a href="{% url 'criterios:home' %}">Início</a>
+  <span class="breadcrumb-sep">›</span>
+  <span aria-current="page">Metodologia</span>
+</nav>
+
+<article class="sp-pagina-legal">
+  <header>
+    <h1>Metodologia editorial</h1>
+    <p class="sp-pagina-legal__intro">
+      Cada critério publicado na PESCP é estruturado em cinco seções
+      obrigatórias e classificado em três dimensões — objeto contratual,
+      fase do processo e nível de ambição — para que seja diretamente
+      aplicável no processo licitatório.
+    </p>
+  </header>
+
+  <section>
+    <h2>Anatomia da ficha de critério</h2>
+    <p>
+      Cada critério publicado na PESCP estrutura-se em
+      <strong>cinco seções obrigatórias</strong>:
+    </p>
+    <ol>
+      <li><strong>Providência</strong> — texto pronto para inserção
+        direta em Estudos Técnicos Preliminares, Termos de Referência,
+        Projetos Básicos, editais ou contratos.</li>
+      <li><strong>Determinações Principais</strong> — síntese normativa
+        que fundamenta a obrigação, com referência expressa às normas
+        vinculadas.</li>
+      <li><strong>Justificativa Técnica</strong> — explica por que o
+        critério existe e qual problema socioambiental endereça.</li>
+      <li><strong>Método de Verificação</strong> — como demonstrar
+        conformidade na execução contratual (documentos, relatórios,
+        inspeções).</li>
+      <li><strong>Precauções</strong> — limites de aplicabilidade,
+        riscos jurídicos e situações de exceção.</li>
+    </ol>
+    <p>
+      Esta anatomia é inspirada na estrutura do
+      <strong>Guia Nacional de Contratações Sustentáveis 2024 da
+      AGU/CGU</strong>, complementada pelo
+      <strong>Guia de Compras Públicas Sustentáveis 2025 da PMSP</strong>
+      e por materiais técnicos produzidos pelos parceiros acadêmicos.
+      Adotamos a anatomia comum às plataformas europeias de referência
+      ({% norma_link "lei-14133-2021" "compatibilizada com a Lei nº 14.133/2021" %}).
+    </p>
+  </section>
+
+  <section>
+    <h2>Classificação em três dimensões</h2>
+    <p>
+      Para apoiar a busca facetada, cada critério é classificado
+      simultaneamente nas seguintes dimensões:
+    </p>
+
+    <h3>1. Objeto contratual</h3>
+    <p>
+      Pilhas e Baterias, Veículos, Limpeza, Construção Civil,
+      Tecnologia da Informação, Alimentação, Mobiliário, e mais
+      categorias organizadas em hierarquia de até dois níveis
+      (supercategoria → categoria).
+    </p>
+
+    <h3>2. Fase do processo licitatório</h3>
+    <ul>
+      <li><strong>Estudo Técnico Preliminar (ETP)</strong> — fase de
+        planejamento da contratação.</li>
+      <li><strong>Termo de Referência ou Projeto Básico (TR/PB)</strong>
+        — especificação técnica do objeto.</li>
+      <li><strong>Edital</strong> — instrumento convocatório com
+        cláusulas formais.</li>
+      <li><strong>Execução</strong> — obrigações da contratada durante
+        a vigência do contrato.</li>
+      <li><strong>Fiscalização</strong> — controles do fiscal de
+        contrato.</li>
+    </ul>
+
+    <h3>3. Nível de ambição</h3>
+    <ul>
+      <li><strong>Básico</strong> — cobre o mínimo legal exigível.</li>
+      <li><strong>Intermediário</strong> — acrescenta exigências
+        tecnicamente viáveis no mercado atual.</li>
+      <li><strong>Avançado</strong> — fronteira de boas práticas,
+        viável em contratações de maior maturidade institucional.</li>
+    </ul>
+  </section>
+
+</article>
+{% endblock %}

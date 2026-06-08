@@ -1,0 +1,161 @@
+{% comment %}
+Sprite SVG inline de ícones. Cada <symbol> é referenciado via
+<svg><use href="#icon-..."/></svg> em outros templates. Compatível com
+CSP script-src 'self' (sem CDN). Cores via currentColor.
+{% endcomment %}
+<svg class="sp-icons-sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+  {# ===== Redes sociais ===== #}
+  <symbol id="icon-facebook" viewBox="0 0 24 24">
+    <path d="M14 8h2.5V5H14c-2.2 0-4 1.8-4 4v2H7v3h3v7h3v-7h2.5l.5-3H13V9c0-.6.4-1 1-1z" fill="currentColor"/>
+  </symbol>
+  <symbol id="icon-instagram" viewBox="0 0 24 24">
+    <rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/>
+    <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/>
+    <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/>
+  </symbol>
+  <symbol id="icon-twitter" viewBox="0 0 24 24">
+    <path d="M4 4l7.5 9.5L4.5 20H7l5.5-5.5L17 20h3l-7.7-9.7L19 4h-2.4l-4.6 5.3L8 4H4z" fill="currentColor"/>
+  </symbol>
+  <symbol id="icon-linkedin" viewBox="0 0 24 24">
+    <rect x="3" y="3" width="18" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
+    <rect x="6.5" y="9.5" width="2.2" height="8.5" fill="currentColor"/>
+    <circle cx="7.6" cy="6.8" r="1.3" fill="currentColor"/>
+    <path d="M11.5 9.5h2v1.2c.5-.8 1.4-1.4 2.6-1.4 2 0 3 1.3 3 3.4V18h-2.2v-4.6c0-1.1-.4-1.9-1.4-1.9-.8 0-1.3.5-1.5 1.1-.1.2-.1.5-.1.7V18h-2.2V9.5z" fill="currentColor"/>
+  </symbol>
+  <symbol id="icon-youtube" viewBox="0 0 24 24">
+    <rect x="2.5" y="6" width="19" height="12" rx="3" fill="none" stroke="currentColor" stroke-width="2"/>
+    <path d="M10.5 9.5l5 2.5-5 2.5z" fill="currentColor"/>
+  </symbol>
+  <symbol id="icon-tiktok" viewBox="0 0 24 24">
+    <path d="M14 3h2.4c.2 1.5 1 2.6 2.6 2.9V8c-1 0-1.9-.2-2.6-.6V14c0 3.3-2.7 5.5-5.4 5.5-2.4 0-4.5-1.7-4.5-4.3 0-2.6 2-4.6 4.7-4.6.3 0 .6 0 .8.1V13c-.3-.1-.6-.2-.9-.2-1.3 0-2.3 1-2.3 2.3 0 1.3 1 2.2 2.3 2.2 1.4 0 2.5-1 2.5-2.6V3z" fill="currentColor"/>
+  </symbol>
+  <symbol id="icon-flickr" viewBox="0 0 24 24">
+    <circle cx="8" cy="12" r="4" fill="currentColor"/>
+    <circle cx="16" cy="12" r="4" fill="currentColor" opacity="0.7"/>
+  </symbol>
+
+  {# ===== Acessibilidade ===== #}
+  <symbol id="icon-a-mais" viewBox="0 0 24 24">
+    <text x="2" y="18" font-size="16" font-family="Arial,sans-serif" font-weight="700" fill="currentColor">A</text>
+    <path d="M16 8v6M13 11h6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="icon-a-menos" viewBox="0 0 24 24">
+    <text x="2" y="18" font-size="13" font-family="Arial,sans-serif" font-weight="700" fill="currentColor">A</text>
+    <path d="M13 13h6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="icon-contraste" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/>
+    <path d="M12 3v18a9 9 0 000-18z" fill="currentColor"/>
+  </symbol>
+  <symbol id="icon-alerta" viewBox="0 0 24 24">
+    <path d="M12 3L2 20h20L12 3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M12 10v5M12 17v.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  </symbol>
+
+  {# ===== Ícones funcionais ===== #}
+  <symbol id="icon-busca" viewBox="0 0 24 24">
+    <circle cx="11" cy="11" r="6" fill="none" stroke="currentColor" stroke-width="2"/>
+    <path d="M16 16l4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="icon-menu" viewBox="0 0 24 24">
+    <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="icon-fechar" viewBox="0 0 24 24">
+    <path d="M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="icon-info" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/>
+    <circle cx="12" cy="8" r="1" fill="currentColor"/>
+    <path d="M12 11v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="icon-externo" viewBox="0 0 24 24">
+    <path d="M14 4h6v6M20 4l-9 9M19 13v6a1 1 0 01-1 1H5a1 1 0 01-1-1V6a1 1 0 011-1h6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <symbol id="icon-balanca" viewBox="0 0 24 24">
+    <path d="M12 3v18M7 21h10M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <symbol id="icon-folha" viewBox="0 0 24 24">
+    <path d="M5 20c1-9 6-14 16-15-1 10-6 15-16 15z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M5 20c4-4 8-7 13-9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="icon-copiar" viewBox="0 0 24 24">
+    <rect x="9" y="3" width="12" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
+    <path d="M5 7v12a2 2 0 002 2h10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="icon-download" viewBox="0 0 24 24">
+    <path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <symbol id="icon-pdf" viewBox="0 0 24 24">
+    <path d="M6 2h9l5 5v13a2 2 0 01-2 2H6a2 2 0 01-2-2V4a2 2 0 012-2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M15 2v5h5" fill="none" stroke="currentColor" stroke-width="2"/>
+    <text x="7" y="18" font-size="6" font-weight="700" fill="currentColor">PDF</text>
+  </symbol>
+  <symbol id="icon-docx" viewBox="0 0 24 24">
+    <path d="M6 2h9l5 5v13a2 2 0 01-2 2H6a2 2 0 01-2-2V4a2 2 0 012-2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M15 2v5h5" fill="none" stroke="currentColor" stroke-width="2"/>
+    <text x="7" y="18" font-size="6" font-weight="700" fill="currentColor">DOC</text>
+  </symbol>
+
+  {# ===== Ícones temáticos das supercategorias de objetos contratuais ===== #}
+  <symbol id="icon-cat-residuos" viewBox="0 0 24 24">
+    <path d="M9 6l-1.5 3M15 6l1.5 3M12 4l-3 5h6l-3-5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M5 11l3 9h8l3-9" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M5 11h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="icon-cat-energia" viewBox="0 0 24 24">
+    <path d="M13 3L5 13h6l-1 8 8-10h-6l1-8z" fill="currentColor"/>
+  </symbol>
+  <symbol id="icon-cat-transporte" viewBox="0 0 24 24">
+    <path d="M4 16V11l2-5h12l2 5v5" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M3 16h18v3H3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+    <circle cx="7.5" cy="17.5" r="1.5" fill="currentColor"/>
+    <circle cx="16.5" cy="17.5" r="1.5" fill="currentColor"/>
+  </symbol>
+  <symbol id="icon-cat-construcao" viewBox="0 0 24 24">
+    <path d="M3 21V10l9-6 9 6v11" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M9 21v-7h6v7" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+  </symbol>
+  <symbol id="icon-cat-limpeza" viewBox="0 0 24 24">
+    <path d="M12 3c-3 4-6 7-6 11a6 6 0 0012 0c0-4-3-7-6-11z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M9 14c0 1.5 1 3 3 3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="icon-cat-ti" viewBox="0 0 24 24">
+    <rect x="3" y="4" width="18" height="13" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
+    <path d="M9 21h6M12 17v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    <path d="M8 9l-2 2 2 2M16 9l2 2-2 2M13 8l-2 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  </symbol>
+  <symbol id="icon-cat-alimentacao" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2"/>
+    <circle cx="12" cy="12" r="3.5" fill="none" stroke="currentColor" stroke-width="2"/>
+    <path d="M19 5l-2 3M5 5l2 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="icon-cat-madeira" viewBox="0 0 24 24">
+    <path d="M12 3l-5 7h3l-4 6h4l-3 5h10l-3-5h4l-4-6h3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M12 16v5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="icon-cat-saude" viewBox="0 0 24 24">
+    <path d="M10 4h4v6h6v4h-6v6h-4v-6H4v-4h6z" fill="currentColor"/>
+  </symbol>
+  <symbol id="icon-cat-inclusao" viewBox="0 0 24 24">
+    <circle cx="8" cy="7" r="3" fill="none" stroke="currentColor" stroke-width="2"/>
+    <circle cx="16" cy="7" r="3" fill="none" stroke="currentColor" stroke-width="2"/>
+    <path d="M3 20c0-3 2-5 5-5s5 2 5 5M11 20c0-3 2-5 5-5s5 2 5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="icon-cat-mobiliario" viewBox="0 0 24 24">
+    <path d="M4 9h16v5H4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M6 14v6M18 14v6M4 9V6h16v3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <symbol id="icon-cat-quimicos" viewBox="0 0 24 24">
+    <path d="M9 3v6l-5 9a2 2 0 002 3h12a2 2 0 002-3l-5-9V3" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M9 3h6M6 14h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    <circle cx="11" cy="17" r="1" fill="currentColor"/>
+    <circle cx="14" cy="19" r="0.7" fill="currentColor"/>
+  </symbol>
+  <symbol id="icon-cat-default" viewBox="0 0 24 24">
+    <rect x="3" y="3" width="18" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
+    <path d="M7 9h10M7 13h7M7 17h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  </symbol>
+
+</svg>

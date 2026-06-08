@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block title %}Parceiros — PESCP — Plataforma Estadual de Sustentabilidade em Contratações Públicas | Governo de SP{% endblock %}
+{% block meta_description %}Conheça os parceiros estratégicos da PESCP: USP, UNESP, UNICAMP e o PNUD, com seus respectivos papéis na construção do conteúdo da plataforma.{% endblock %}
+
+{% block content %}
+<nav class="breadcrumb" aria-label="Trilha de navegação">
+  <a href="{% url 'criterios:home' %}">Início</a>
+  <span class="breadcrumb-sep">›</span>
+  <span aria-current="page">Parceiros</span>
+</nav>
+
+<article class="sp-pagina-legal">
+  <header>
+    <h1>Parceiros institucionais</h1>
+    <p class="sp-pagina-legal__intro">
+      A construção do conteúdo inicial da PESCP é resultado de
+      cooperação institucional entre o Governo do Estado de São Paulo
+      e quatro parceiros estratégicos: USP, UNESP, UNICAMP e o PNUD.
+    </p>
+  </header>
+
+  <section>
+    <h2>Universidades estaduais paulistas</h2>
+    <p>
+      As três universidades públicas estaduais paulistas contribuem com
+      revisão técnica, pesquisa aplicada e curadoria editorial de
+      critérios em domínios temáticos específicos, em complemento à
+      curadoria operacional feita pelo LILP/SGGD.
+    </p>
+
+    <h3>Universidade de São Paulo (USP)</h3>
+    <p>
+      Apoio em critérios das áreas de saúde pública, alimentação
+      institucional e gestão hospitalar; revisão técnica de critérios
+      relacionados à pesquisa, ensino e laboratórios.
+    </p>
+
+    <h3>Universidade Estadual Paulista (UNESP)</h3>
+    <p>
+      Apoio em critérios de meio ambiente, agronegócio sustentável,
+      biotecnologia e gestão de unidades de conservação; curadoria
+      em domínios de impacto ambiental territorial.
+    </p>
+
+    <h3>Universidade Estadual de Campinas (UNICAMP)</h3>
+    <p>
+      Apoio em critérios de tecnologia da informação, eletrônica,
+      eficiência energética e materiais avançados; revisão de fichas
+      relacionadas a equipamentos de TI e instrumentação científica.
+    </p>
+  </section>
+
+  <section>
+    <h2>Programa das Nações Unidas para o Desenvolvimento (PNUD)</h2>
+    <p>
+      O PNUD apoia o <strong>alinhamento metodológico</strong> da
+      PESCP com:
+    </p>
+    <ul>
+      <li>A <strong>Agenda 2030</strong> e os 17 Objetivos de
+        Desenvolvimento Sustentável, garantindo que cada critério
+        publicado tenha vinculação explícita aos ODS que contribui
+        para alcançar.</li>
+      <li>As <strong>melhores práticas internacionais</strong> em
+        contratações públicas sustentáveis, com referência a
+        plataformas de países como Suécia, Holanda, Irlanda e Noruega.</li>
+      <li>O <strong>monitoramento de impacto</strong> dos critérios,
+        com indicadores quantitativos e qualitativos a serem
+        desenvolvidos em ciclos editoriais subsequentes.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Instrumentos jurídicos da cooperação</h2>
+    <p>
+      A cooperação observa <strong>instrumentos jurídicos formais</strong>
+      firmados entre as instituições, com:
+    </p>
+    <ul>
+      <li>Divisão clara de responsabilidades entre curadoria editorial
+        (LILP), revisão técnica (parceiros acadêmicos) e revisão
+        jurídica (PGE-SP).</li>
+      <li>Atribuição de créditos editoriais por critério, preservando
+        a autoria das contribuições.</li>
+      <li>Previsão de evolução contínua do conteúdo nos
+        <strong>ciclos editoriais subsequentes</strong>, com
+        renovação anual dos termos de cooperação.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Como participar</h2>
+    <p>
+      Instituições interessadas em cooperar com a PESCP — universidades,
+      institutos de pesquisa, organismos internacionais — podem
+      encaminhar manifestação de interesse pela página de
+      <a href="{% url 'conteudo:contato' %}">Contato</a> ou pelo
+      e-mail institucional do LILP
+      (<a href="mailto:lab.sggd@sp.gov.br">lab.sggd@sp.gov.br</a>).
+    </p>
+  </section>
+</article>
+{% endblock %}

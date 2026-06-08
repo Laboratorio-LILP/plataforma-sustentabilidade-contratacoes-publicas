@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+{% load static pescp_tags %}
+
+{% block title %}Sobre — PESCP — Plataforma Estadual de Sustentabilidade em Contratações Públicas | Governo de SP{% endblock %}
+{% block meta_description %}Conheça o LILP/SGGD, o propósito da PESCP, a parceria com USP, UNESP, UNICAMP e PNUD, e a metodologia editorial dos critérios de sustentabilidade.{% endblock %}
+
+{% block content %}
+<nav class="breadcrumb" aria-label="Trilha de navegação">
+  <a href="{% url 'criterios:home' %}">Início</a>
+  <span class="breadcrumb-sep">›</span>
+  <span aria-current="page">Sobre a PESCP</span>
+</nav>
+
+<article class="sp-pagina-legal">
+  <header>
+    <h1>Sobre a Plataforma Estadual de Sustentabilidade em Contratações Públicas</h1>
+    <p class="sp-pagina-legal__intro">
+      A PESCP é um instrumento digital e consultivo que apoia servidores
+      públicos paulistas na integração sistemática de critérios de
+      sustentabilidade em aquisições de bens, contratações de serviços
+      e obras, em conformidade com a {% norma_link "lei-14133-2021" "Lei nº 14.133/2021" %} e alinhada aos
+      17 Objetivos de Desenvolvimento Sustentável da Agenda 2030.
+    </p>
+  </header>
+
+  <section>
+    <h2>O Laboratório de Inovação em Logística Pública (LILP)</h2>
+    <p>
+      A PESCP é uma iniciativa do <strong>Laboratório de Inovação em
+      Logística Pública (LILP)</strong>, criado pela
+      <strong>{% norma_link "res-sggd-38-2024" "Resolução SGGD nº 38, de 19 de dezembro de 2024" %}</strong>,
+      no âmbito da Secretaria de Gestão e Governo Digital do Estado
+      de São Paulo (SGGD).
+    </p>
+    <p>
+      Como laboratório, o LILP atua de forma experimental: prototipa
+      soluções, gera evidências, dialoga com a academia e dissemina
+      boas práticas para todo o ecossistema de compras e contratações
+      do Estado — abrangendo contratações, gestão de suprimentos e
+      gestão patrimonial.
+    </p>
+  </section>
+
+  <section>
+    <h2>Propósito e público-alvo</h2>
+    <p>
+      O propósito da PESCP é apoiar os servidores públicos paulistas
+      — <strong>pregoeiros, gestores e fiscais de contrato, equipes
+      técnicas</strong> — na integração sistemática de critérios de
+      sustentabilidade nas três modalidades centrais de contratação
+      pública:
+    </p>
+    <ul>
+      <li><strong>Aquisição de bens</strong> — desde pilhas e baterias
+        até veículos, equipamentos eletroeletrônicos e mobiliário.</li>
+      <li><strong>Contratação de serviços</strong> — limpeza,
+        conservação, alimentação, manutenção predial.</li>
+      <li><strong>Obras e serviços de engenharia</strong> — construção
+        civil, infraestrutura, reformas, com cadernos técnicos próprios.</li>
+    </ul>
+    <p>
+      A plataforma compila e sistematiza orientações jurídicas,
+      técnicas e operacionais existentes em nível federal, estadual e
+      municipal, organizando-as em fichas de critério prontas para
+      uso em Estudos Técnicos Preliminares, Termos de Referência,
+      Projetos Básicos, editais e contratos.
+    </p>
+  </section>
+
+  <section>
+    <h2>Parceria com USP, UNESP, UNICAMP e PNUD</h2>
+    <p>
+      A construção do conteúdo inicial da PESCP é resultado de
+      cooperação institucional entre o Governo do Estado de São Paulo
+      e quatro parceiros estratégicos:
+    </p>
+    <ul>
+      <li><strong>Universidade de São Paulo (USP)</strong>,
+        <strong>Universidade Estadual Paulista (UNESP)</strong> e
+        <strong>Universidade Estadual de Campinas (UNICAMP)</strong>
+        — revisão técnica, pesquisa aplicada e curadoria editorial
+        de critérios em domínios temáticos específicos.</li>
+      <li><strong>Programa das Nações Unidas para o Desenvolvimento
+        (PNUD)</strong> — alinhamento metodológico com a Agenda 2030
+        e com as melhores práticas internacionais em contratações
+        públicas sustentáveis.</li>
+    </ul>
+    <p>
+      A cooperação observa instrumentos jurídicos formais firmados
+      entre as instituições, com previsão de evolução contínua do
+      conteúdo nos ciclos editoriais subsequentes.
+      Veja a página de <a href="{% url 'conteudo:parceiros' %}">Parceiros</a>
+      para detalhes.
+    </p>
+  </section>
+
+  <section>
+    <h2>Sobre os critérios</h2>
+    <p>
+      Cada critério publicado na PESCP é uma ficha curada e versionada
+      com cinco seções obrigatórias: <strong>Providência</strong>
+      (texto pronto para inserção em documentos contratuais),
+      <strong>Determinações Principais</strong> (síntese normativa),
+      <strong>Justificativa Técnica</strong> (problema endereçado),
+      <strong>Método de Verificação</strong> (como demonstrar
+      conformidade na execução) e <strong>Precauções</strong> (limites
+      de aplicabilidade e situações de exceção).
+    </p>
+    <p>
+      Os critérios são compilados, prioritariamente, do
+      <strong>Guia Nacional de Contratações Sustentáveis 2024 da
+      AGU/CGU</strong>, do <strong>Guia de Compras Públicas
+      Sustentáveis 2025 da Prefeitura Municipal de São Paulo</strong>
+      e de materiais complementares produzidos em parceria com as
+      universidades. Cada ficha é vinculada aos 17 ODS, ao arcabouço
+      da Lei nº 14.133/2021 e às normas setoriais aplicáveis.
+      Detalhes em <a href="{% url 'conteudo:metodologia' %}">Metodologia</a>.
+    </p>
+  </section>
+
+  <section>
+    <h2>Marco normativo</h2>
+    <ul>
+      <li>{% norma_link "cf-88-art-170-vi" "Constituição Federal de 1988, art. 170, VI" %}
+        e {% norma_link "cf-88-art-225" "art. 225" %} —
+        princípios da ordem econômica e direito ao meio ambiente.</li>
+      <li>{% norma_link "lei-14133-2021" "Lei nº 14.133/2021" %} — Nova Lei de Licitações e Contratos
+        (art. 5º — desenvolvimento nacional sustentável como princípio;
+        art. 11, IV — como objetivo).</li>
+      <li>{% norma_link "res-sggd-38-2024" "Resolução SGGD nº 38/2024" %} — Institui o LILP.</li>
+      <li>Decreto Estadual nº 67.799/2023 — Estratégia de Governo Digital.</li>
+      <li>Agenda 2030 da ONU — 17 Objetivos de Desenvolvimento Sustentável.</li>
+    </ul>
+  </section>
+</article>
+{% endblock %}
