@@ -1,0 +1,66 @@
+# Padrão LILP de fins de linha — idêntico ao da BDLP.
+# Garante que código que roda DENTRO de containers Linux fique sempre em LF,
+# mesmo quando o checkout acontece no desktop Windows do escritório.
+
+# Default: let Git decide eol per platform, with text detection on
+* text=auto
+
+# Shell / Linux container scripts -- MUST be LF or container exec fails
+*.sh        text eol=lf
+*.bash      text eol=lf
+entrypoint* text eol=lf
+Dockerfile  text eol=lf
+Dockerfile.* text eol=lf
+*.dockerfile text eol=lf
+
+# Container/orchestration manifests run on Linux
+*.yml  text eol=lf
+*.yaml text eol=lf
+*.conf text eol=lf
+*.ini  text eol=lf
+
+# Application code that runs inside Linux containers
+*.py  text eol=lf
+*.php text eol=lf
+*.sql text eol=lf
+
+# Web assets (kept LF for parity with most editors)
+*.html text eol=lf
+*.css  text eol=lf
+*.js   text eol=lf
+*.json text eol=lf
+*.md   text eol=lf
+*.txt  text eol=lf
+*.xml  text eol=lf
+*.svg  text eol=lf
+
+# Windows-native scripts: keep CRLF
+*.ps1 text eol=crlf
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Binary assets -- never normalize
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.ico  binary
+*.webp binary
+*.pdf  binary
+*.zip  binary
+*.gz   binary
+*.tar  binary
+*.7z   binary
+*.xlsx binary
+*.xls  binary
+*.docx binary
+*.doc  binary
+*.pptx binary
+*.ppt  binary
+*.woff binary
+*.woff2 binary
+*.ttf  binary
+*.otf  binary
+*.eot  binary
+*.mp4  binary
+*.mp3  binary
