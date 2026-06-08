@@ -1,0 +1,17 @@
+services:
+  web:
+    environment:
+      DJANGO_SETTINGS_MODULE: pescp.settings.prod
+      DJANGO_DEBUG: "false"
+    # Sem volume bind do código em produção — usa imagem construída
+    volumes:
+      - media:/app/media
+      - staticfiles:/app/staticfiles
+    command: >
+      sh -c "python manage.py collectstatic --noinput &&
+             python manage.py migrate --noinput &&
+             gunicorn pescp.wsgi:application --bind 0.0.0.0:8000 --workers 3 --access-logfile - --error-logfile -"
+
+volumes:
+  media:
+  staticfiles:
