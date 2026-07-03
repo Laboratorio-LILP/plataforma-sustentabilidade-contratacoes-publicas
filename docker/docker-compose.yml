@@ -6,7 +6,7 @@ services:
     environment:
       POSTGRES_DB: ${POSTGRES_DB:-pescp}
       POSTGRES_USER: ${POSTGRES_USER:-pescp}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme_pescp_2026}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?defina POSTGRES_PASSWORD no .env (sem fallback — padrão LILP)}
     volumes:
       - pgdata:/var/lib/postgresql/data
       - ./postgres/init:/docker-entrypoint-initdb.d:ro
@@ -27,12 +27,12 @@ services:
       dockerfile: docker/app/Dockerfile
     environment:
       DJANGO_SETTINGS_MODULE: ${DJANGO_SETTINGS_MODULE:-pescp.settings.dev}
-      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:-insecure-dev-key-change-in-production}
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:?defina DJANGO_SECRET_KEY no .env (sem fallback — padrão LILP)}
       DJANGO_DEBUG: ${DJANGO_DEBUG:-true}
       DJANGO_ALLOWED_HOSTS: ${DJANGO_ALLOWED_HOSTS:-localhost,127.0.0.1}
       POSTGRES_DB: ${POSTGRES_DB:-pescp}
       POSTGRES_USER: ${POSTGRES_USER:-pescp}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme_pescp_2026}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?defina POSTGRES_PASSWORD no .env (sem fallback — padrão LILP)}
       POSTGRES_HOST: postgres
       POSTGRES_PORT: "5432"
       PESCP_PUBLIC_URL: ${PESCP_PUBLIC_URL:-http://localhost:8002}
@@ -42,8 +42,9 @@ services:
       - media:/app/media
       - staticfiles:/app/staticfiles
     ports:
+      # Loopback-only no host (convenção LILP / ADR-0008 da BDLP).
       # Porta de host 8002 para coexistir com a BDLP (portal 8000, nourau 8080).
-      - "${PESCP_PORT:-8002}:8000"
+      - "127.0.0.1:${PESCP_PORT:-8002}:8000"
     depends_on:
       postgres:
         condition: service_healthy
